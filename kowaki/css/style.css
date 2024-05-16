@@ -1,5 +1,6 @@
-html{}
-body{}
+html,body {
+    overflow: hidden;
+  }
 
 .shizuru-regular {
     font-family: "Shizuru", system-ui;
@@ -46,7 +47,7 @@ main{
     margin:  auto;
 }
 #img{ 
-    margin: 0px auto 20px;
+    margin: 30px auto;
 }
 
 #img img{ 
@@ -57,12 +58,15 @@ main{
 
 #illust{}
 
-.answer{}
+.answer{
+    position: relative;
+}
 
 .answer ul{
     list-style: none;
     display: flex;
     justify-content: space-between;
+    cursor: pointer;
 }
 
 .answer ul > li{
@@ -114,7 +118,7 @@ main{
     display: flex;
     align-items: center;
 	position: fixed;
-	z-index: 100;
+	z-index: 0;
 }
 
 #button{  
@@ -127,6 +131,91 @@ main{
 }
 
 #startButton{
+    display: block;
+    font-size: 28px;
+    width: 80%;
+    border: 2px solid #000;
+    text-align: center;
+    padding: 20px 0;
+    margin: 10px auto;
+    border-radius: 10px 50px/50px 10px;
+    transition: .5s;
+    background: #fff;
+}
+
+
+.fade-out {
+    opacity: 0;
+}
+#result-page {
+    display: none;
+}
+
+footer{
+    text-align: center;
+    font-size: 12px;
+    position: absolute;
+    bottom: 10px;
+    left: 40%;
+}
+
+/* add
+------------------*/
+
+#wrapper, #result-page {
+    opacity: 1;
+    transition: opacity 0.5s;
+}
+.fade-out {
+    opacity: 0;
+}
+.fade-in {
+    opacity: 1;
+}
+#result-page {
+    display: none;
+}
+
+/* 点数ページ
+--------------------------*/
+
+#result-page{
+    height: 100vh;
+    width: 100%;
+    text-align:center;
+    position:relative;
+}
+#result-page div{
+    width: 100%;
+    position:absolute;
+    top: 40%;
+    left:50%;
+    transform:translate(-50%,-50%);
+}
+#result-page h1{
+    font-family: "Shizuru", system-ui;
+    font-weight: 900;
+    font-style: normal;
+    font-size: 56px;
+    margin-bottom: 60px;
+}
+#result-page h2{
+    font-family: "Shizuru", system-ui;
+    font-weight: 900;
+    font-style: normal;
+    font-size: 32px;
+}
+
+#result-page h2 .scoreText{
+    font-family: "Shizuru", system-ui;
+    font-style: normal;
+    font-size: 150px;
+    color: #a00000;
+    display: block;
+    padding: 0 0 40px 0;
+}
+
+#restartButton{
     display: block;
     font-size: 20px;
     width: 60%;
