@@ -142,15 +142,6 @@ main{
     transition: .5s;
     background: #fff;
 }
-
-
-.fade-out {
-    opacity: 0;
-}
-#result-page {
-    display: none;
-}
-
 footer{
     text-align: center;
     font-size: 12px;
@@ -196,23 +187,21 @@ footer{
     font-family: "Shizuru", system-ui;
     font-weight: 900;
     font-style: normal;
-    font-size: 56px;
+    font-size: 48px;
     margin-bottom: 60px;
 }
 #result-page h2{
     font-family: "Shizuru", system-ui;
     font-weight: 900;
     font-style: normal;
-    font-size: 32px;
+    font-size: 36px;
 }
 
 #result-page h2 .scoreText{
     font-family: "Shizuru", system-ui;
     font-style: normal;
-    font-size: 150px;
-    color: #a00000;
-    display: block;
-    padding: 0 0 40px 0;
+    font-size: 100px;
+    padding: 0;
 }
 
 #restartButton{
