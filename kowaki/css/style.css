@@ -1,0 +1,229 @@
+html,body {
+    overflow: hidden;
+  }
+
+.shizuru-regular {
+    font-family: "Shizuru", system-ui;
+    font-weight: 900;
+    font-style: normal;
+  }
+  
+img{
+    max-width: 100%;
+}
+
+
+#startButton, #wrapper {
+    transition: opacity 0.6s;
+}
+
+.hidden {
+    opacity: 0;
+    display: none;
+}
+
+.visible {
+    opacity: 1;
+    display: block;
+}
+
+#wrapper{
+    max-width: 768px;
+    width: 100%;
+    margin: auto;
+    height: 100vh;
+    transition: .5s;
+}
+header{
+    padding: 30px 0!important;
+}
+header h1{
+    font-size: 28px;
+    text-align: center;
+}
+
+main{
+    width: 95%;
+    margin:  auto;
+}
+#img{ 
+    margin: 30px auto;
+}
+
+#img img{ 
+    display: block;
+    width: 80%;
+    margin: auto;
+}
+
+#illust{}
+
+.answer{
+    position: relative;
+}
+
+.answer ul{
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.answer ul > li{
+    font-size: 20px;
+    width: 48%;
+    border: 2px solid #000;
+    text-align: center;
+    padding: 10px 0;
+    margin: 10px auto;
+    border-radius: 10px 50px/50px 10px;
+    transition: .5s;
+}
+.answer ul > li:hover{
+    background: #000;
+    color: #fff;
+}
+
+
+/* ロゴフェードイン 
+--------------------------*/
+
+.logo_fadein{
+	background: #FFF;
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100vh;
+	width: 100%;
+	z-index: 999;
+}
+.logo_fadein p {
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	display: none;
+	z-index: 9999;
+	width: 280px;
+}
+.logo_fadein p img{
+	width: 100%;
+}
+
+/* スタートボタン
+--------------------------*/
+#game_start{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+	position: fixed;
+	z-index: 0;
+}
+
+#button{  
+    width: 100%;
+}
+
+#button h1{  
+    font-size: 28px;
+    text-align: center;
+}
+
+#startButton{
+    display: block;
+    font-size: 28px;
+    width: 80%;
+    border: 2px solid #000;
+    text-align: center;
+    padding: 20px 0;
+    margin: 10px auto;
+    border-radius: 10px 50px/50px 10px;
+    transition: .5s;
+    background: #fff;
+}
+
+
+.fade-out {
+    opacity: 0;
+}
+#result-page {
+    display: none;
+}
+
+footer{
+    text-align: center;
+    font-size: 12px;
+    position: absolute;
+    bottom: 10px;
+    left: 40%;
+}
+
+/* add
+------------------*/
+
+#wrapper, #result-page {
+    opacity: 1;
+    transition: opacity 0.5s;
+}
+.fade-out {
+    opacity: 0;
+}
+.fade-in {
+    opacity: 1;
+}
+#result-page {
+    display: none;
+}
+
+/* 点数ページ
+--------------------------*/
+
+#result-page{
+    height: 100vh;
+    width: 100%;
+    text-align:center;
+    position:relative;
+}
+#result-page div{
+    width: 100%;
+    position:absolute;
+    top: 40%;
+    left:50%;
+    transform:translate(-50%,-50%);
+}
+#result-page h1{
+    font-family: "Shizuru", system-ui;
+    font-weight: 900;
+    font-style: normal;
+    font-size: 56px;
+    margin-bottom: 60px;
+}
+#result-page h2{
+    font-family: "Shizuru", system-ui;
+    font-weight: 900;
+    font-style: normal;
+    font-size: 32px;
+}
+
+#result-page h2 .scoreText{
+    font-family: "Shizuru", system-ui;
+    font-style: normal;
+    font-size: 150px;
+    color: #a00000;
+    display: block;
+    padding: 0 0 40px 0;
+}
+
+#restartButton{
+    display: block;
+    font-size: 20px;
+    width: 60%;
+    border: 2px solid #000;
+    text-align: center;
+    padding: 10px 0;
+    margin: 10px auto;
+    border-radius: 10px 50px/50px 10px;
+    transition: .5s;
+    background: #fff;
+}
