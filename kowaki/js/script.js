@@ -214,7 +214,7 @@ function checkAnswer(selectedIndex) {
     if (selectedIndex === selectedQuestions[currentQuestionIndex].correctAnswer) {
         resultElement.textContent = 'すばらしい';
         resultElement.className = 'correct';
-        score += 10;
+        score += 20;
     } else {
         resultElement.textContent = 'ざんねん';
         resultElement.className = 'incorrect';
@@ -257,7 +257,7 @@ function showScore() {
     const resultPage = document.getElementById('result-page');
     const scoreElement = document.getElementById('score');
 
-    document.getElementById('result').textContent = 'おわり';
+    document.getElementById('result').innerHTML = 'おわり';
     scoreElement.innerHTML = `あなたのスコアは <span class="scoreText">${score}</span> です！`;
 
     fadeIn(resultPage, () => {

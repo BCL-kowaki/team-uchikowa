@@ -216,3 +216,7 @@ footer{
     transition: .5s;
     background: #fff;
 }
+
+#result{
+    display: block!important;
+}
