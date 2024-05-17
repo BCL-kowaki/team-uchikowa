@@ -78,6 +78,7 @@ const questions = [
 ];
 
 
+let selectedQuestions = [];
 let currentQuestionIndex = 0;
 let score = 0;
 let questionsAsked = 0;
@@ -88,28 +89,36 @@ function startGame() {
     
     fadeOut(startButton, () => {
         startButton.style.display = 'none';
-        fadeIn(content, showQuestion);
+        fadeIn(content, () => {
+            shuffle(questions);
+            selectedQuestions = questions.slice(0, 5); // ランダムに5問選択
+            console.log("Selected Questions:", selectedQuestions); // デバッグ用ログ
+            showQuestion();
+        });
     });
 }
 
 // フェードイン関数
 function fadeIn(element, callback) {
     console.log("Fade in:", element.id); // デバッグ用ログ
-    element.style.opacity = 0; // 要素の初期透明度を0に設定（完全に透明）
-    element.style.display = 'block'; // 要素を表示状態に設定
+    element.style.opacity = 0;
+    element.style.display = 'block';
 
-    let last = +new Date(); // 現在の時間をミリ秒単位で取得
+    let last = +new Date();
     let tick = function() {
-        element.style.opacity = +element.style.opacity + (new Date() - last) / 400; // 透明度を徐々に増加
-        last = +new Date(); // 現在の時間を更新
+        element.style.opacity = parseFloat(element.style.opacity) + (new Date() - last) / 400;
+        last = +new Date();
 
-        if (+element.style.opacity < 1) { // 透明度が1未満の場合（完全に表示されていない場合）
-            (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16); // アニメーションフレームをリクエスト
-        } else if (callback) { // 透明度が1に達した場合（完全に表示された場合）
-            callback(); // コールバック関数を呼び出す
+        if (parseFloat(element.style.opacity) < 1) {
+            (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16);
+        } else {
+            element.style.opacity = 1; // 透明度を1に設定（完全に表示）
+            if (callback) {
+                callback();
+            }
         }
     };
-    tick(); // アニメーションを開始
+    tick();
 }
 
 // フェードアウト関数
@@ -119,12 +128,13 @@ function fadeOut(element, callback) {
 
     let last = +new Date();
     let tick = function() {
-        element.style.opacity = +element.style.opacity - (new Date() - last) / 400;
+        element.style.opacity = parseFloat(element.style.opacity) - (new Date() - last) / 400;
         last = +new Date();
 
-        if (+element.style.opacity > 0) {
+        if (parseFloat(element.style.opacity) > 0) {
             (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16);
         } else {
+            element.style.opacity = 0; // 透明度を0に設定（完全に透明）
             element.style.display = 'none';
             if (callback) {
                 callback();
@@ -154,7 +164,7 @@ function showQuestion() {
     const resultPage = document.getElementById('result-page');
     const wrapper = document.getElementById('wrapper');
 
-    const currentQuestion = questions[currentQuestionIndex];
+    const currentQuestion = selectedQuestions[currentQuestionIndex];
 
     console.log("Current Question Index:", currentQuestionIndex);
     console.log("Current Question:", currentQuestion);
@@ -176,10 +186,10 @@ function showQuestion() {
 }
 
 function resetResultDisplay(resultElement, resultPage, wrapper) {
-    // if (resultElement) {
-    //     resultElement.style.display = 'none';
-    //     resultElement.textContent = '';
-    // }
+    if (resultElement) {
+        resultElement.style.display = 'none';
+        resultElement.textContent = '';
+    }
 
     resultPage.style.display = 'none';
     wrapper.style.display = 'block';
@@ -199,12 +209,12 @@ function checkAnswer(selectedIndex) {
     const wrapper = document.getElementById('wrapper');
 
     console.log("Selected Answer Index:", selectedIndex);
-    console.log("Correct Answer Index:", questions[currentQuestionIndex].correctAnswer);
+    console.log("Correct Answer Index:", selectedQuestions[currentQuestionIndex].correctAnswer);
 
-    if (selectedIndex === questions[currentQuestionIndex].correctAnswer) {
+    if (selectedIndex === selectedQuestions[currentQuestionIndex].correctAnswer) {
         resultElement.textContent = 'すばらしい';
         resultElement.className = 'correct';
-        score += 20;
+        score += 10;
     } else {
         resultElement.textContent = 'ざんねん';
         resultElement.className = 'incorrect';
@@ -214,10 +224,9 @@ function checkAnswer(selectedIndex) {
     choiceElements.forEach(choiceElement => choiceElement.style.pointerEvents = 'none');
 
     fadeOut(wrapper, () => {
-        resultPage.style.display = 'block';
         fadeIn(resultPage, () => {
             setTimeout(() => {
-                if (questionsAsked < 5) {
+                if (questionsAsked < 5) { // 5問に達していない場合
                     fadeOut(resultPage, nextQuestion);
                 } else {
                     showScore();
@@ -232,9 +241,8 @@ function nextQuestion() {
     const resultPage = document.getElementById('result-page');
 
     currentQuestionIndex++;
-    if (currentQuestionIndex >= questions.length) {
+    if (currentQuestionIndex >= selectedQuestions.length) {
         currentQuestionIndex = 0;
-        shuffle(questions);
     }
 
     console.log("Next Question Index:", currentQuestionIndex);
